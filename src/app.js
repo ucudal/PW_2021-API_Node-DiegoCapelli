@@ -33,7 +33,7 @@ app.post('/enviar-formulario', function (req, res) {
  
   if (req.body.nombreContacto == null) {
     res.statusCode = 400;
-    res.end("Falta el nombre del Contacto");
+    res.end("Falta el nombre de contacto");
   } else {
     res.cookie('PW_2021-CV_Contacto', req.body.nombreContacto);
     res.end("datos agregados con exito");
@@ -45,7 +45,7 @@ app.post('/enviar-formulario', function (req, res) {
 app.post('/*', function (req, res) {
 
   res.statusCode = 404;
-  res.end("No fue encontrado");
+  res.end("404 - No fue encontrado");
 
 });
 
