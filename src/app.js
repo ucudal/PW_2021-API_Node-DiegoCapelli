@@ -42,13 +42,14 @@ app.get('/experiencia-laboral', function(req, res) {
 
 app.post('/enviar-formulario', function(req, res) {
  
+console.log(req.body.nombreContacto);
   if (req.body.nombreContacto == null || req.body.nombreContacto=='') {
-    
+     
     res.statusCode = 400;
-    var json = JSON.stringify("Falta el nombre de contacto");
-    res.end(json);
+  //  var json = JSON.stringify('Falta el nombre de contacto');
+    res.end('Falta el nombre de contacto');
   } else {
-   
+    
     res.cookie('PW_2021-CV_Contacto', req.body.nombreContacto);
 
     var fs = require('fs')
@@ -59,17 +60,25 @@ app.post('/enviar-formulario', function(req, res) {
             req.body.lastname + ',' + req.body.phone + ',' +
             req.body.motive +'\n';
     writeData.write(dataToSave)
-    writeData.end(); 
+    writeData.end();
+ 
 
-    /* 
+
+    /*
+        
+    
         var readStream = fs.createReadStream('data.txt');
     
         readStream.on('data', function(chunk) {
           console.log(chunk.toString());
     
-        }); 
+        });
+    
+    
     */
- 
+
+
+
     var json = JSON.stringify("Datos agregados con exito");
     res.end(json);
   }
