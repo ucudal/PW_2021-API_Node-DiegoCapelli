@@ -24,7 +24,7 @@ app.get('/experiencia-laboral', function(req, res) {
   };
 
   const cvData3 = {
-    empresa: "Empresa Z", puesto: "Fullstack Developer",
+    empresa: "Empresa Z", puesto: "Msterstack Developer",
     descripcion: "Programar saladamente de todo un Poco",
     fechaInicio: new Date("2020-04-04"),
     fechaFin: new Date("2021-04-04")
@@ -46,8 +46,8 @@ console.log(req.body.nombreContacto);
   if (req.body.nombreContacto == null || req.body.nombreContacto=='') {
      
     res.statusCode = 400;
-  //  var json = JSON.stringify('Falta el nombre de contacto');
-    res.end('Falta el nombre de contacto');
+     var json = JSON.stringify('Falta el nombre de contacto');
+    res.end(json);
   } else {
     
     res.cookie('PW_2021-CV_Contacto', req.body.nombreContacto);
@@ -87,6 +87,13 @@ console.log(req.body.nombreContacto);
 });
 
 app.post('/*', function(req, res) {
+
+  res.statusCode = 404;
+  res.end("404 - No fue encontrado");
+
+});
+
+app.get('/*', function(req, res) {
 
   res.statusCode = 404;
   res.end("404 - No fue encontrado");
