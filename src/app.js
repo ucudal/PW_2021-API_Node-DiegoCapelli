@@ -24,7 +24,7 @@ app.get('/experiencia-laboral', function(req, res) {
   };
 
   const cvData3 = {
-    empresa: "Empresa Z", puesto: "Fullstack Developer",
+    empresa: "Empresa Z", puesto: "Msterstack Developer",
     descripcion: "Programar saladamente de todo un Poco",
     fechaInicio: new Date("2020-04-04"),
     fechaFin: new Date("2021-04-04")
@@ -42,13 +42,14 @@ app.get('/experiencia-laboral', function(req, res) {
 
 app.post('/enviar-formulario', function(req, res) {
  
+console.log(req.body.nombreContacto);
   if (req.body.nombreContacto == null || req.body.nombreContacto=='') {
-    
+     
     res.statusCode = 400;
-    var json = JSON.stringify("Falta el nombre de contacto");
+     var json = JSON.stringify('Falta el nombre de contacto');
     res.end(json);
   } else {
-   
+    
     res.cookie('PW_2021-CV_Contacto', req.body.nombreContacto);
 
     var fs = require('fs')
@@ -59,17 +60,25 @@ app.post('/enviar-formulario', function(req, res) {
             req.body.lastname + ',' + req.body.phone + ',' +
             req.body.motive +'\n';
     writeData.write(dataToSave)
-    writeData.end(); 
+    writeData.end();
+ 
 
-    /* 
+
+    /*
+        
+    
         var readStream = fs.createReadStream('data.txt');
     
         readStream.on('data', function(chunk) {
           console.log(chunk.toString());
     
-        }); 
+        });
+    
+    
     */
- 
+
+
+
     var json = JSON.stringify("Datos agregados con exito");
     res.end(json);
   }
@@ -78,6 +87,13 @@ app.post('/enviar-formulario', function(req, res) {
 });
 
 app.post('/*', function(req, res) {
+
+  res.statusCode = 404;
+  res.end("404 - No fue encontrado");
+
+});
+
+app.get('/*', function(req, res) {
 
   res.statusCode = 404;
   res.end("404 - No fue encontrado");
